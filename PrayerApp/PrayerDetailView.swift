@@ -8,11 +8,19 @@
 import SwiftUI
 
 struct PrayerDetailView: View {
+    
+    @Binding var prayer: Prayer
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text(prayer.text1)
+            Text(prayer.text2)
+            Text(prayer.text3)
+        }
+            
     }
 }
 
 #Preview {
-    PrayerDetailView()
+    PrayerDetailView(prayer: .constant(Prayer(id: 1, text1: "reading title", text2: "reading", text3: "response")))
 }

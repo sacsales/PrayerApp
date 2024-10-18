@@ -18,11 +18,16 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            List(prayers, id: \.id) { prayer in
-                Text(prayer.text1)
+            List($prayers) { $prayer in
+                NavigationLink {
+                    PrayerDetailView(prayer: $prayer)
+                } label: {
+                    Text(prayer.text1)
+                }
             }
             .navigationTitle("Prayers")
         }
+    
        
        
     }
