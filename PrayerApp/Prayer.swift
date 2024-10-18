@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+struct Prayer: Identifiable {
+    var id: Int
+    var text1: String
+    var text2: String
+    var text3: String
+}
