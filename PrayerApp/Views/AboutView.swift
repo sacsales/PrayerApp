@@ -11,9 +11,17 @@ struct AboutView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                Text("About")
-                    .bold()
-                    .font(.largeTitle)
+                
+                HStack {
+                    Text("About")
+                        .bold()
+                        .font(.largeTitle)
+                    Spacer()
+                    Image("sayGraceLogo")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 100, height: 100)
+                }
                 Text("""
 
 “A family that prays together stays together” - My Lola Mercy believed this wholeheartedly.

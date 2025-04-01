@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MainPrayerView: View {
     
+    @Binding var prayerNumber : Int
+    
     
     @ObservedObject var prayerManager : PrayerManager
     var body: some View {
@@ -16,14 +18,14 @@ struct MainPrayerView: View {
             List {
                 ForEach($prayerManager.prayers.sorted(by: {$0.id < $1.id})) { $prayer in
                 NavigationLink {
-                    PrayerDetailView(prayer: $prayer)
+                    PrayerDetailView(prayerManager: prayerManager, prayerNumber: $prayer.id, prayer: $prayer, inSheet: false)
                     
                 } label: {
                     Text("Prayer \(prayer.id + 1 )")
                 }
             }
                 
-            .navigationTitle("Prayers")
+            .navigationTitle("All Prayers")
             }
         }
         
@@ -31,5 +33,5 @@ struct MainPrayerView: View {
 }
 
 #Preview {
-    MainPrayerView(prayerManager: PrayerManager())
+    MainPrayerView(prayerNumber: .constant(0), prayerManager: PrayerManager())
 }
