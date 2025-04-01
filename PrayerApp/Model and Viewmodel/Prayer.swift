@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Prayer: Identifiable {
+struct Prayer: Identifiable, Codable {
     var id: Int
     var text1: String
     var text2: String
