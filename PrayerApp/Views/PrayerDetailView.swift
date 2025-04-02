@@ -18,12 +18,17 @@ struct PrayerDetailView: View {
     
     @State var inSheet : Bool
     
+    @Environment(\.dismiss) var goAway
     
     var body: some View {
         VStack {
            
             ScrollView {
                 VStack (alignment: .leading) {
+                    
+                    if inSheet {
+                        ButtonBarView(prayerManager: prayerManager, numberToChange: $prayerNumber)
+                    }
                     HStack {
                         VStack (alignment: .leading){
                             Text("Today's Prayer              ")
@@ -33,6 +38,7 @@ struct PrayerDetailView: View {
                                 .bold()
                         }
                        
+                        Spacer()
                         Image("sayGraceLogo")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
@@ -55,6 +61,16 @@ struct PrayerDetailView: View {
  **Together:** In the name of the Father, of the Son, and of the Holy Spirit. Amen.
  
  """)
+                    
+                    Button {
+                        goAway()
+                    } label: {
+                        Text("Dismiss")
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.orange)
+                    
+                    
                     Spacer()
                     
                     

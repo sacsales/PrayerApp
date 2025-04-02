@@ -59,8 +59,7 @@ struct ContentView: View {
                         
                     
                 }
-            Text("(Swipe down to view more prayers)")
-                .font(.footnote)
+           
         }
         
         .onChange(of: scenePhase) { oldPhase, newPhase in
