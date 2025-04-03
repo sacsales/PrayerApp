@@ -33,7 +33,7 @@ class PrayerManager: ObservableObject {
         try? encodedPrayers?.write(to: archiveURL, options: .noFileProtection)
     }
     func load() {
-      //  prayers = Prayer.samplePrayers
+        prayers = allPrayers
         let archiveURL = getArchiveURL()
         print(archiveURL)
         let propertyListDecoder = PropertyListDecoder()

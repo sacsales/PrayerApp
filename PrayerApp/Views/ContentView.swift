@@ -70,6 +70,8 @@ struct ContentView: View {
                     } else {
                         storedPrayerNumber += 1
                     }
+                
+                print(prayerManager.prayers)
                     
                 
             }
