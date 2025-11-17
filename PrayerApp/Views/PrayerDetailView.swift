@@ -62,14 +62,14 @@ struct PrayerDetailView: View {
  
  """)
                     
-                    Button {
-                        goAway()
-                    } label: {
-                        Text("Dismiss")
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .tint(.orange)
-                    
+//                    Button {
+//                        goAway()
+//                    } label: {
+//                        Text("Dismiss")
+//                    }
+//                    .buttonStyle(.borderedProminent)
+//                    .tint(.orange)
+//                    
                     
                     Spacer()
                     

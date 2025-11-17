@@ -21,9 +21,6 @@ struct ContentView: View {
     
     @StateObject var prayerManager = PrayerManager()
     
-   
-    
-    
     @Environment(\.scenePhase) var scenePhase
     
     
@@ -32,9 +29,29 @@ struct ContentView: View {
         
         
         TabView {
+            
+            
+            PrayerDetailView(prayerManager: prayerManager, prayerNumber: $storedPrayerNumber, prayer: $prayerManager.prayers.first(where: { $0.id == storedPrayerNumber }) ?? $prayerManager.prayers[0], inSheet: true)
+//                .onDisappear {
+//                  
+//                        if storedPrayerNumber + 1 >= prayerManager.prayers.count {
+//                            storedPrayerNumber = 0
+//                        } else {
+//                            storedPrayerNumber += 1
+//                        }
+//                        
+//                    
+//                }
+                .tabItem {
+                    Label("Daily", systemImage: "sun.max.fill")
+                }
+            
+          
+               
+            
             MainPrayerView(prayerNumber: $prayerNumber, prayerManager: prayerManager)
                 .tabItem {
-                    Label("Prayers", systemImage: "doc.plaintext")
+                    Label("All Prayers", systemImage: "doc.plaintext")
                 }
             AboutView()
                 .tabItem {
@@ -46,21 +63,21 @@ struct ContentView: View {
             TitleView()
         }
         
-        .sheet(isPresented: $showDaily) {
-           
-            PrayerDetailView(prayerManager: prayerManager, prayerNumber: $storedPrayerNumber, prayer: $prayerManager.prayers.first(where: { $0.id == storedPrayerNumber }) ?? $prayerManager.prayers[0], inSheet: true)
-                .onDisappear {
-                  
-                        if storedPrayerNumber + 1 >= prayerManager.prayers.count {
-                            storedPrayerNumber = 0
-                        } else {
-                            storedPrayerNumber += 1
-                        }
-                        
-                    
-                }
-           
-        }
+//        .sheet(isPresented: $showDaily) {
+//           
+//            PrayerDetailView(prayerManager: prayerManager, prayerNumber: $storedPrayerNumber, prayer: $prayerManager.prayers.first(where: { $0.id == storedPrayerNumber }) ?? $prayerManager.prayers[0], inSheet: true)
+//                .onDisappear {
+//                  
+//                        if storedPrayerNumber + 1 >= prayerManager.prayers.count {
+//                            storedPrayerNumber = 0
+//                        } else {
+//                            storedPrayerNumber += 1
+//                        }
+//                        
+//                    
+//                }
+//           
+//        }
         
         .onChange(of: scenePhase) { oldPhase, newPhase in
             if newPhase == .background {
