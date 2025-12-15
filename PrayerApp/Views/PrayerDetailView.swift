@@ -21,32 +21,38 @@ struct PrayerDetailView: View {
     @Environment(\.dismiss) var goAway
     
     var body: some View {
-        VStack {
-           
-            ScrollView {
-                VStack (alignment: .leading) {
-                    
-                    if inSheet {
-                        ButtonBarView(prayerManager: prayerManager, numberToChange: $prayerNumber)
-                    }
-                    HStack {
-                        VStack (alignment: .leading){
-                            Text("Today's Prayer              ")
-                                .bold()
-                                .font(.largeTitle)
-                            Text("(Prayer \(prayer.id + 1))      ")
-                                .bold()
+        NavigationView {
+            
+            VStack {
+//                if inSheet {
+//                    ButtonBarView(prayerManager: prayerManager, numberToChange: $prayerNumber)
+//                }
+                
+                
+                ScrollView {
+                    VStack (alignment: .leading) {
+                        
+                        //                    if inSheet {
+                        //                        ButtonBarView(prayerManager: prayerManager, numberToChange: $prayerNumber)
+                        //                    }
+                        HStack {
+                            VStack (alignment: .leading){
+                                Text("Today's Prayer              ")
+                                    .bold()
+                                    .font(.largeTitle)
+                                Text("(Prayer \(prayer.id + 1))      ")
+                                    .bold()
+                            }
+                            
+                            Spacer()
+                            Image("sayGraceLogo")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 100, height: 100)
                         }
-                       
-                        Spacer()
-                        Image("sayGraceLogo")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 100, height: 100)
-                    }
-                    
+                        
                         .font(.title3)
-                    Text("""
+                        Text("""
  
  **Head of the Family:**
  In the name of the Father, of the Son and of the Holy Spirit. Amen.
@@ -61,30 +67,67 @@ struct PrayerDetailView: View {
  **Together:** In the name of the Father, of the Son, and of the Holy Spirit. Amen.
  
  """)
-                    
-//                    Button {
-//                        goAway()
-//                    } label: {
-//                        Text("Dismiss")
-//                    }
-//                    .buttonStyle(.borderedProminent)
-//                    .tint(.orange)
-//                    
-                    
-                    Spacer()
-                    
-                    
-                    
-                    
+                        
+                        //                    Button {
+                        //                        goAway()
+                        //                    } label: {
+                        //                        Text("Dismiss")
+                        //                    }
+                        //                    .buttonStyle(.borderedProminent)
+                        //                    .tint(.orange)
+                        //
+                        
+                        
+                        Spacer()
+                        
+                        
+                        
+                        
+                        
+                    }
+                    .padding()
+                    .toolbar {
+                        
+                        if inSheet {
+                            
+                            ToolbarItem (placement: .topBarLeading) {
+                                Button {
+                                    if prayerNumber - 1 < 0 {
+                                        prayerNumber = prayerManager.prayers.count - 1
+                                    } else {
+                                        prayerNumber -= 1
+                                    }
+                                } label: {
+                                    
+                                    Image(systemName: "arrow.left")
+                                        
+                                }
+                                .buttonStyle(.borderedProminent)
+                                .tint(.orange)
+                            }
+                            
+                            ToolbarItem {
+                                Button {
+                                    if prayerNumber + 1 > prayerManager.prayers.count - 1 {
+                                        prayerNumber = 0
+                                    } else {
+                                        prayerNumber += 1
+                                    }
+                                } label: {
+                                    Image(systemName: "arrow.right")
+                                }
+                                .buttonStyle(.borderedProminent)
+                                .tint(.orange)
+                            }
+                        }
+                    }
                     
                 }
-                .padding()
                 
                 
             }
-            
-            
         }
+        
     }
 }
 

@@ -25,7 +25,6 @@ struct ButtonBarView: View {
             } label: {
                
                 Image(systemName: "arrow.left")
-                Text("Previous")
             }
             .buttonStyle(.borderedProminent)
             
@@ -38,7 +37,6 @@ struct ButtonBarView: View {
                     numberToChange += 1
                 }
             } label: {
-                Text("Next")
                 Image(systemName: "arrow.right")
             }
             .buttonStyle(.borderedProminent)
