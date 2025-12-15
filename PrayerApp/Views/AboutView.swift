@@ -24,15 +24,15 @@ struct AboutView: View {
                 }
                 Text("""
 
-“A family that prays together stays together” - My Grandmother, Lola Mercy, believed this wholeheartedly.
+“A family that prays together stays together” - My grandmother, Lola Mercy, believed this wholeheartedly.
 
 Mealtimes were always special at our household. Lola Mercy showed her love for us through the food she lovingly prepared and set on our table. Each meal would begin with a short prayer of thanks, aided by a set of prayer cards she picked up at a charity bazaar held at our church, many years ago. 
 
- The same prayers are found here, to honor my Lola Mercy’s memory. It comes with the hope that the practice of saying grace will bring families closer, no matter where they may be. 
+The same prayers are found here, to honor my Lola Mercy’s memory. It comes with the hope that the practice of saying grace will bring families closer, no matter where they may be. 
 
- May God bless your family, bring you closer in spirit, and make you a blessing to everyone you meet. ~ Sabrina Angeline Cedo Sales
+ May God bless your family, bring you closer in spirit, and make you a blessing to everyone you meet. 
 
-    - Sabrina Angeline Cedo Sales
+~ Sabrina Angeline Cedo Sales
 """)
             }
         }
