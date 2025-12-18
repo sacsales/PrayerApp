@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct AboutView: View {
+    
+    @AppStorage("isOnBoarding") var isOnBoarding: Bool = true
+    
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -35,7 +39,16 @@ The same prayers are found here, to honor my Lola Mercy’s memory. It comes wit
 ~ Sabrina Angeline Cedo Sales
 """)
             }
+            
+            Button("Show Cover Art") {
+                isOnBoarding = true
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(.orange)
+            .padding()
         }
+        
+        
         .padding()
         
     }
