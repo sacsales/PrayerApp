@@ -12,8 +12,10 @@
 
 import Foundation
 
+let personalPrayers: [Prayer] = []
 
-let allPrayers = [
+
+let defaultPrayers = [
     
         Prayer(id: 0, text1: "Psalm 104: 14-15", text2: "You make grass grow for the cattle, and plants for man to use, so that he can grow his crops, and produce wine to make him happy, olive oil to make him cheerful and bread to give him strength.", text3: "Father of all creation, we thank you for all the gifts you lavish upon us every day. Bless those whose work produces what we eat and drink. Help us live in peace. Amen."),
       

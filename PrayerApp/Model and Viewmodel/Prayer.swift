@@ -9,7 +9,10 @@ import Foundation
 
 struct Prayer: Identifiable, Codable {
     var id: Int
+    
     var text1: String
     var text2: String
     var text3: String
+    var personal = false
+    var personal_id = 0
 }

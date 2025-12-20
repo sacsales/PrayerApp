@@ -18,30 +18,32 @@ struct PrayerDetailView: View {
     
     @State var inSheet : Bool
     
+    @State var personal: Bool
+    
+    @State private var showEditSheet = false 
+    
     @Environment(\.dismiss) var goAway
     
     var body: some View {
         NavigationView {
             
             VStack {
-//                if inSheet {
-//                    ButtonBarView(prayerManager: prayerManager, numberToChange: $prayerNumber)
-//                }
-                
-                
+
                 ScrollView {
                     VStack (alignment: .leading) {
                         
-                        //                    if inSheet {
-                        //                        ButtonBarView(prayerManager: prayerManager, numberToChange: $prayerNumber)
-                        //                    }
                         HStack {
                             VStack (alignment: .leading){
                                 Text("Today's Prayer              ")
                                     .bold()
                                     .font(.largeTitle)
-                                Text("(Prayer \(prayer.id + 1))      ")
-                                    .bold()
+                                if prayerNumber > 89 {
+                                    Text("(Personal Prayer \(prayer.personal_id + 1))      ")
+                                        .bold()
+                                } else {
+                                    Text("(Prayer \(prayer.id + 1))      ")
+                                        .bold()
+                                }
                             }
                             
                             Spacer()
@@ -68,14 +70,7 @@ struct PrayerDetailView: View {
  
  """)
                         
-                        //                    Button {
-                        //                        goAway()
-                        //                    } label: {
-                        //                        Text("Dismiss")
-                        //                    }
-                        //                    .buttonStyle(.borderedProminent)
-                        //                    .tint(.orange)
-                        //
+                        
                         
                         
                         Spacer()
@@ -93,7 +88,7 @@ struct PrayerDetailView: View {
                             ToolbarItem (placement: .topBarLeading) {
                                 Button {
                                     if prayerNumber - 1 < 0 {
-                                        prayerNumber = prayerManager.prayers.count - 1
+                                        prayerNumber = prayerManager.allPrayers.count - 1
                                     } else {
                                         prayerNumber -= 1
                                     }
@@ -108,7 +103,7 @@ struct PrayerDetailView: View {
                             
                             ToolbarItem {
                                 Button {
-                                    if prayerNumber + 1 > prayerManager.prayers.count - 1 {
+                                    if prayerNumber + 1 > prayerManager.allPrayers.count - 1 {
                                         prayerNumber = 0
                                     } else {
                                         prayerNumber += 1
@@ -120,6 +115,21 @@ struct PrayerDetailView: View {
                                 .tint(.orange)
                             }
                         }
+                        
+                        if inSheet == false && personal == true {
+                            
+                                ToolbarItem(placement: .navigationBarTrailing) {
+                                    Button("Edit") {
+                                        showEditSheet = true
+                                    }
+//                                    Button {
+//                                        
+//                                    } label: {
+//                                        Image(systemName: "trash.fill")
+//                                    }
+                                
+                            }
+                        }
                     }
                     
                 }
@@ -127,12 +137,17 @@ struct PrayerDetailView: View {
                 
             }
         }
+        .sheet(isPresented: $showEditSheet) {
+            EditPrayerView(prayer: $prayer, prayerManager: prayerManager)
+        }
         
     }
+    
+        
 }
 
 #Preview {
-    PrayerDetailView(prayerManager: PrayerManager(), prayerNumber: .constant(0), prayer: .constant(Prayer(id: 1, text1: "text1", text2: "text2", text3: "text3")), inSheet: true)
+    PrayerDetailView(prayerManager: PrayerManager(), prayerNumber: .constant(0), prayer: .constant(Prayer(id: 1, text1: "text1", text2: "text2", text3: "text3")), inSheet: false, personal: true)
 }
 
 

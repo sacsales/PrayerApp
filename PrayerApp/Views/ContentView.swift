@@ -31,17 +31,8 @@ struct ContentView: View {
         TabView {
             
             
-            PrayerDetailView(prayerManager: prayerManager, prayerNumber: $storedPrayerNumber, prayer: $prayerManager.prayers.first(where: { $0.id == storedPrayerNumber }) ?? $prayerManager.prayers[0], inSheet: true)
-//                .onDisappear {
-//                  
-//                        if storedPrayerNumber + 1 >= prayerManager.prayers.count {
-//                            storedPrayerNumber = 0
-//                        } else {
-//                            storedPrayerNumber += 1
-//                        }
-//                        
-//                    
-//                }
+            PrayerDetailView(prayerManager: prayerManager, prayerNumber: $storedPrayerNumber, prayer: $prayerManager.allPrayers.first(where: { $0.id == storedPrayerNumber }) ?? $prayerManager.allPrayers[0], inSheet: true, personal: (storedPrayerNumber > 89) )
+
                 .tabItem {
                     Label("Daily", systemImage: "sun.max.fill")
                 }
@@ -58,6 +49,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("About", systemImage: "questionmark.circle.fill")
                 }
+           
             
         }
         .sheet(isPresented: $isOnBoarding) {
