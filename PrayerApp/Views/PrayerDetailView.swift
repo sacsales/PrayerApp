@@ -20,15 +20,17 @@ struct PrayerDetailView: View {
     
     @State var personal: Bool
     
-    @State private var showEditSheet = false 
+    @State private var showEditSheet = false
     
     @Environment(\.dismiss) var goAway
+    @Environment(\.openURL) private var openURL
+
     
     var body: some View {
         NavigationView {
             
             VStack {
-
+                
                 ScrollView {
                     VStack (alignment: .leading) {
                         
@@ -54,9 +56,10 @@ struct PrayerDetailView: View {
                         }
                         
                         .font(.title3)
-                        Text("""
+                        
+                        var prayerText = """
  
- **Head of the Family:**
+ ***Head of the Family:**
  In the name of the Father, of the Son and of the Holy Spirit. Amen.
  
  **A reading from \(prayer.text1).** \(prayer.text2)
@@ -68,13 +71,20 @@ struct PrayerDetailView: View {
  
  **Together:** In the name of the Father, of the Son, and of the Holy Spirit. Amen.
  
- """)
+ """
                         
+                        Text(.init(prayerText))
                         
-                        
-                        
+                            .textSelection(.enabled)
+            
                         Spacer()
                         
+                        
+                        if personal {
+                            Button("Send Prayer"){
+                                sendEmail()
+                            }
+                        }
                         
                         
                         
@@ -95,7 +105,7 @@ struct PrayerDetailView: View {
                                 } label: {
                                     
                                     Image(systemName: "arrow.left")
-                                        
+                                    
                                 }
                                 .buttonStyle(.borderedProminent)
                                 .tint(.orange)
@@ -118,15 +128,15 @@ struct PrayerDetailView: View {
                         
                         if inSheet == false && personal == true {
                             
-                                ToolbarItem(placement: .navigationBarTrailing) {
-                                    Button("Edit") {
-                                        showEditSheet = true
-                                    }
-//                                    Button {
-//                                        
-//                                    } label: {
-//                                        Image(systemName: "trash.fill")
-//                                    }
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                Button("Edit") {
+                                    showEditSheet = true
+                                }
+                                //                                    Button {
+                                //
+                                //                                    } label: {
+                                //                                        Image(systemName: "trash.fill")
+                                //                                    }
                                 
                             }
                         }
@@ -141,10 +151,46 @@ struct PrayerDetailView: View {
             EditPrayerView(prayer: $prayer, prayerManager: prayerManager)
         }
         
+        
+        
     }
     
-        
-}
+    func sendEmail() {
+        var components = URLComponents()
+               components.scheme = "mailto"
+               components.path = "saygracedev@gmail.com"
+               components.queryItems = [
+                   URLQueryItem(name: "subject", value: "New Prayer Submission"),
+                   URLQueryItem(name: "body", value: """
+                        ***Head of the Family:**
+                        In the name of the Father, of the Son and of the Holy Spirit. Amen.
+                        
+                        **A reading from \(prayer.text1).** \(prayer.text2)
+                        
+                        _(Pause for a few moments of reflection)_
+                        
+                        **Family Member:**
+                        \(prayer.text3)
+                        
+                        **Together:** In the name of the Father, of the Son, and of the Holy Spirit. Amen.
+                       """
+                       
+                               )
+               ]
+
+               if let mailtoUrl = components.url {
+                   openURL(mailtoUrl) { accepted in
+                       if !accepted {
+                           // Handle case where no mail app is configured
+                           print("Mail app not found or URL not accepted.")
+                       }
+                   }
+               }
+           }
+    }
+    
+   
+
 
 #Preview {
     PrayerDetailView(prayerManager: PrayerManager(), prayerNumber: .constant(0), prayer: .constant(Prayer(id: 1, text1: "text1", text2: "text2", text3: "text3")), inSheet: false, personal: true)

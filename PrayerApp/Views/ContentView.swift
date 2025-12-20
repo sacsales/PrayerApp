@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @AppStorage("number") var storedPrayerNumber = 4
+    @AppStorage("number") var storedPrayerNumber = 10
     
     
     @State var prayerNumber = 0
@@ -26,15 +26,16 @@ struct ContentView: View {
     
     var body: some View {
         
-        
-        
         TabView {
             
             
-            PrayerDetailView(prayerManager: prayerManager, prayerNumber: $storedPrayerNumber, prayer: $prayerManager.allPrayers.first(where: { $0.id == storedPrayerNumber }) ?? $prayerManager.allPrayers[0], inSheet: true, personal: (storedPrayerNumber > 89) )
+            PrayerDetailView(prayerManager: prayerManager, prayerNumber: $storedPrayerNumber, prayer: $prayerManager.allPrayers.first(where: { $0.id == storedPrayerNumber }) ?? .constant(Prayer(id: 0, text1: "", text2: "", text3: "")), inSheet: true, personal: (storedPrayerNumber > 89) )
 
                 .tabItem {
                     Label("Daily", systemImage: "sun.max.fill")
+                }
+                .onShake {
+                    storedPrayerNumber = Int.random(in: 0..<prayerManager.allPrayers.count)
                 }
                 
             

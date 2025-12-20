@@ -36,7 +36,7 @@ The same prayers are found here, to honor my Lola Mercy’s memory. It comes wit
 
  May God bless your family, bring you closer in spirit, and make you a blessing to everyone you meet. 
 
-~ Sabrina Angeline Cedo Sales
+- Sabrina Angeline Cedo Sales
 """)
             }
             
@@ -46,7 +46,18 @@ The same prayers are found here, to honor my Lola Mercy’s memory. It comes wit
             .buttonStyle(.borderedProminent)
             .tint(.orange)
             .padding()
+            
+            Text("Want to leave feedback or contribute a prayer? Email me at:")
+                .italic()
+                .font(.footnote)
+            Text("saygracedev@gmail.com")
+            
+            .textSelection(.enabled)
+            .padding()
+            Text("https://saygrace.carrd.co")
+                .padding()
         }
+        
         
         
         .padding()

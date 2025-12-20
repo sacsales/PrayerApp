@@ -19,7 +19,7 @@ struct MainPrayerView: View {
             List {
                 
                     
-                    Section ("Personal Prayers") {
+                Section ("Personal Prayers (\($prayerManager.personalPrayers.count))") {
                         ForEach($prayerManager.personalPrayers.sorted(by: {$0.id < $1.id})) { $prayer in
                             NavigationLink {
                                 PrayerDetailView(prayerManager: prayerManager, prayerNumber: $prayer.id, prayer: $prayer, inSheet: false, personal: true)
@@ -33,7 +33,7 @@ struct MainPrayerView: View {
                         
                     }
                 
-                Section ("Lola Mercy's Prayers") {
+                Section ("Lola Mercy's Prayers (90)") {
                     
                     ForEach($prayerManager.prayers.sorted(by: {$0.id < $1.id})) { $prayer in
                         NavigationLink {
@@ -45,14 +45,8 @@ struct MainPrayerView: View {
                     }
                    
                     
-                    
-                    
                 }
-                
-                
-                
-                
-                
+     
             }
             
             
